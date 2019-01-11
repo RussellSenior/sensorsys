@@ -54,6 +54,7 @@ while True:
 	string = socket.recv_string()
 	printing = True
 	logfile.write(string + "\n")
+	logfile.flush()
 	printed = True
 	print("received: %s" % (string))
 	printing = False
