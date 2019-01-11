@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 import zmq
 import time
 import os
