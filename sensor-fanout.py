@@ -17,7 +17,7 @@ for line in sys.stdin:
 		os.mkdir(sensorPath)
 	day = int(time)
 	day = day - (day % 86400)
-	fname = sensorPath + "/" + ("%u" % day)
+	fname = sensorPath + "/" + ("%u" % day) + ".log"
 	out = f.get(fname)
 	if out == None:
 		out = open(fname,"a+")
