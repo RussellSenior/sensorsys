@@ -1,0 +1,11 @@
+[Unit]
+Description=Polling BME280 pressure,temperature,humidity sensor
+
+[Service]
+Type=simple
+ExecStart= /home/russell/src/sensorsys/sensor-pub-bme280.py dodson.ptp 
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+

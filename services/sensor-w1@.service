@@ -1,0 +1,11 @@
+[Unit]
+Description=Polling One Wire Slaves for Bus %I
+
+[Service]
+Type=simple
+ExecStart= /home/russell/src/sensorsys/sensor-pub-w1.py dodson.ptp %I 
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+

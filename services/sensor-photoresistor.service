@@ -1,0 +1,11 @@
+[Unit]
+Description=Polling photoresistor sensor
+
+[Service]
+Type=simple
+ExecStart= /home/russell/src/sensorsys/sensor-pub-photoresistor.py dodson.ptp 
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+
