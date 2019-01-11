@@ -9,7 +9,8 @@ context = zmq.Context()
 socket = context.socket(zmq.PUB)
 socket.connect("tcp://" + sys.argv[1] + ":5556")
 
-for line in sys.stdin:
+while 1:
+	line = sys.stdin.readline()
 	l = line.rstrip()
 	print(l)
 	socket.send_string("%s" % l)
