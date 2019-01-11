@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 import zmq
 import sys
 
@@ -11,6 +13,8 @@ socket.connect("tcp://" + sys.argv[1] + ":5556")
 
 while 1:
 	line = sys.stdin.readline()
+	if not line:
+		break
 	l = line.rstrip()
 	print(l)
 	socket.send_string("%s" % l)
