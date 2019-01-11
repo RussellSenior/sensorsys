@@ -1,16 +1,16 @@
-#
-#   Weather update server
-#   Binds PUB socket to tcp://*:5556
-#   Publishes random weather updates
-#
-
 import zmq
-import time;
+import sys
+
+if len(sys.argv) < 2:
+	print("usage: %s <host>" % sys.argv[0])
+	sys.exit(0)
 
 context = zmq.Context()
 socket = context.socket(zmq.PUB)
-socket.connect("tcp://localhost:5556")
+socket.connect("tcp://" + sys.argv[1] + ":5556")
 
-while True:
-	socket.send_string("%i 1" % (time.time()))
-	time.sleep(2)
+for line in sys.stdin:
+	l = line.rstrip()
+	print(l)
+	socket.send_string("%s" % l)
+
