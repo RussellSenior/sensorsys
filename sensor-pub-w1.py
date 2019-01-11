@@ -17,6 +17,7 @@ socket = context.socket(zmq.PUB)
 socket.connect("tcp://" + sys.argv[1] + ":5556")
 
 while True:
+	count = 0
 	for filename in os.listdir(syspath):
 		if filename.startswith("28-"):
 			fullfname = syspath + filename + "/w1_slave"
@@ -30,3 +31,6 @@ while True:
 			temp_c = fields[1]
 			# print("%s %s %i" % (filename,temp_c,crc_ok))
 			socket.send_string("%i %s %s" % (time.time(),filename,temp_c))
+			count = count + 1
+	if count == 0:
+		time.sleep(5)	
