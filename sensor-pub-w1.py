@@ -32,7 +32,8 @@ while True:
 			fields = lines[1].split("=")
 			temp_c = fields[1]
 			# print("%s %s %i" % (filename,temp_c,crc_ok))
-			socket.send_string("%i %s %s" % (time.time(),filename,temp_c))
+			if crc_ok:
+				socket.send_string("%i %s %s" % (time.time(),filename,temp_c))
 			count = count + 1
 	if count == 0:
 		time.sleep(5)	
