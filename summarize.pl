@@ -12,11 +12,18 @@ else {
 while (<>) {
     chomp;
     my ($caltime,$val) = split();
+    $val = $val * $k;
     # print "$caltime $val\n";
     foreach my $p (@periods) {
         my $t = $caltime - ($caltime % $p);
         $sum{$t}{$p} += $val;
         $count{$t}{$p}++;
+	if (!exists $min{$t}{$p} || $val < $min{$t}{$p}) {
+		$min{$t}{$p} = $val;
+	}
+	if (!exists $max{$t}{$p} || $val > $max{$t}{$p}) {
+		$max{$t}{$p} = $val;
+	}
     }
 }
 
@@ -26,10 +33,10 @@ foreach $t (keys %count) {
     foreach $p ( keys %{ $count{$t} }) {
 	#print "$t $p\n";
         $mean{$t}{$p} = 
-            $sum{$t}{$p} * $k /
+            $sum{$t}{$p} /
             $count{$t}{$p};
         $mean{$t}{$p} = int($mean{$t}{$p} + 0.5);
-        print "$t $p $sum{$t}{$p} $count{$t}{$p} $mean{$t}{$p}\n";
+        print "$t $p $sum{$t}{$p} $count{$t}{$p} $mean{$t}{$p} $min{$t}{$p} $max{$t}{$p}\n";
     }
 }
 
