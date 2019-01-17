@@ -15,6 +15,8 @@ for line in sys.stdin:
 	sensorPath = topdir + "/" + sensor
 	if not os.path.isdir(sensorPath):
 		os.mkdir(sensorPath)
+		os.link("mkstuff/Makefile",sensorPath + "/Makefile")
+		os.link("mkstuff/multiplier.mk.1",sensorPath + "/multiplier.mk")
 	day = int(time)
 	day = day - (day % 86400)
 	fname = sensorPath + "/" + ("%u" % day) + ".log"
