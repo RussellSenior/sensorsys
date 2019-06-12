@@ -1,0 +1,5 @@
+
+
+update
+
+  time ( kill -HUP 24336 ; sleep 2 ; ./sensor-fanout.py < rotated.log && ( cd data ; make -j2 ) && xz -9 -T0 rotated.log && mv rotated.log.xz rotated/rotated.log-$(date +'%Y%m%d-%H%M%S').xz )
