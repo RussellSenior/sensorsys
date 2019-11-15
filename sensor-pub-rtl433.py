@@ -44,18 +44,20 @@ ka = k.rstrip().split(",")
 # rain_mm
 
 last = ''
+previous = { }
+delta = 5
 v = [ ka.index(i) for i in ka if i in ("time","brand","model","id","channel","battery_ok","temperature_C","humidity") ]
+
 
 while True:
 	d = rtl.stdout.readline()
-	if d != last:
-		da = d.rstrip().split(",")
-		(time,brand,model,id,channel,battery_ok,temperature_C,humidity) = [ da[i] for i in v ]
+	da = d.rstrip().split(",")
+	(time,brand,model,id,channel,battery_ok,temperature_C,humidity) = [ da[i] for i in v ]
+	if (id not in previous) or (int(time) > (previous[id] + delta)):
 		print time,brand,model,id,channel,battery_ok,temperature_C,humidity
 		if model == "Acurite-Tower":
 			socket.send_string("%s %s %s" % (time,"acu-" + id + "-temp", temperature_C))
 			socket.send_string("%s %s %s" % (time,"acu-" + id + "-rh", humidity))
 		elif model == "Oregon-v1":
 			socket.send_string("%s %s %s" % (time,"os-" + id + "-temp", temperature_C))
-
-	last = d
+	previous[id] = int(time)
