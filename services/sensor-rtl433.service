@@ -1,0 +1,11 @@
+[Unit]
+Description=Polling rtl433 sensors
+
+[Service]
+Type=simple
+ExecStart= /home/russell/src/sensorsys/sensor-pub-rtl433.py dodson 
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+
