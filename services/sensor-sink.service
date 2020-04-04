@@ -1,0 +1,14 @@
+[Unit]
+Description=Receive sensorsys data and write it to an incoming file
+
+[Service]
+Type=simple
+User=russell
+Group=russell
+WorkingDirectory=/home/russell/src/ingest/
+ExecStart= /home/russell/src/ingest/sensor-sink.py 
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+
